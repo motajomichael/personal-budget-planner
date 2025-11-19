@@ -1,8 +1,7 @@
-# 🎈 Blank app template
+This folder is for example data files, such as:
 
-A simple Streamlit app template for you to modify!
-
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+- Original Excel budget templates
+- Exported budget snapshots
 
 ### How to run it on your own machine
 
