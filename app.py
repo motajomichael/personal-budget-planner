@@ -9,10 +9,10 @@ from budget.data_model import (
     copy_month_to_all,
 )
 from budget.calculations import (
-    get_month_totals,
     get_monthly_summary,
     get_group_totals_for_month,
-    projected_end_balance,
+    get_annual_totals,
+    projected_year_end_balance,
 )
 from budget.charts import (
     show_monthly_summary_chart,
@@ -84,18 +84,17 @@ def sidebar_controls():
 
 def render_summary_cards():
     df = st.session_state.budget_df
-    month = st.session_state.selected_month
     starting_balance = st.session_state.starting_balance
 
-    totals = get_month_totals(df, month)
-    end_balance = projected_end_balance(starting_balance, totals["net"])
+    totals = get_annual_totals(df)
+    year_end_balance = projected_year_end_balance(starting_balance, totals["net"])
 
     col1, col2, col3, col4 = st.columns(4)
 
-    col1.metric("Total Income", f"{totals['income']:,.0f}")
-    col2.metric("Total Expenses", f"{totals['expenses']:,.0f}")
-    col3.metric("Net (Income - Expenses)", f"{totals['net']:,.0f}")
-    col4.metric("Projected End Balance", f"{end_balance:,.0f}")
+    col1.metric("Annual Income", f"{totals['income']:,.0f}")
+    col2.metric("Annual Expenses", f"{totals['expenses']:,.0f}")
+    col3.metric("Annual Net (Income - Expenses)", f"{totals['net']:,.0f}")
+    col4.metric("Projected Year-End Balance", f"{year_end_balance:,.0f}")
 
 
 def render_category_editor():

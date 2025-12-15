@@ -71,3 +71,24 @@ def projected_end_balance(starting_balance: float, net: float) -> float:
     Simple projection: starting balance + net.
     """
     return float(starting_balance + net)
+
+def get_annual_totals(df: pd.DataFrame) -> dict:
+    """
+    Compute total income, total expenses and net for the whole year (all months).
+    """
+    income = df.loc[df["type"] == "income", "amount"].sum()
+    expenses = df.loc[df["type"] == "expense", "amount"].sum()
+    net = income - expenses
+
+    return {
+        "income": float(income),
+        "expenses": float(expenses),
+        "net": float(net),
+    }
+
+
+def projected_year_end_balance(starting_balance: float, annual_net: float) -> float:
+    """
+    Year-end balance: starting balance + annual net
+    """
+    return float(starting_balance + annual_net)
